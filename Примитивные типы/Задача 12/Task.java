@@ -17,39 +17,15 @@ public class Task {
         System.out.println(printTextPerRole(roles, textLines));
     }
     public static String printTextPerRole(String[] roles, String[] textLines) {
-        int counter = 0;
-        int index = 0;
-        String name = "";
-        String replice = "";
-        boolean isFind = false;
         StringBuilder stringBuilder = new StringBuilder();
         for (int i = 0; i < roles.length; i++) {
+            stringBuilder.append(roles[i]).append(":").append("\n");
             for (int j = 0; j < textLines.length; j++) {
-                if (textLines[j].contains(roles[i])) {
-                    if (isFind == false) {
-                        isFind = true;
-                        index = textLines[j].indexOf(":");
-                        name = roles[i];
-                        replice = name + ":" + "\n" + (j + 1) + ")"
-                                + textLines[j].substring(index + 1, textLines[j].length()) + "\n";
-                        stringBuilder.append(replice);
-                        replice = "";
-                        counter++;
-                    } else if (isFind == true) {
-                        index = textLines[j].indexOf(":");
-                        replice = (j + 1) + ")" + textLines[j].substring(index + 1, textLines[j].length())
-                                + "\n" + "\n";
-                        stringBuilder.append(replice);
-                        counter++;
-                        replice = "";
-                    }
+                if(textLines[j].startsWith(roles[i] + ":")) {
+                    stringBuilder.append(j + 1).append(")").append(textLines[j].substring(roles[i].length() + 1)).append("\n");
                 }
             }
-            isFind = false;
-            if (counter == 1) {
-                stringBuilder.append("\n");
-            }
-            counter = 0;
+            stringBuilder.append("\n");
         }
 
         return stringBuilder.toString();
