@@ -14,42 +14,44 @@ public class Task {
         "Аммос Федорович: Вот те на!",
         "Артемий Филиппович: Вот не было заботы, так подай!",
         "Лука Лукич: Господи боже! еще и с секретным предписаньем!"};
-        ArrayList<String> strings = printTextPerRole(roles,textLines);
-        for (int i = 0; i < strings.size(); i++) {
-            System.out.println(strings.get(i));
-        }
+        System.out.println(printTextPerRole(roles, textLines));
     }
-    public static ArrayList<String> printTextPerRole(String[] roles, String[] textLines) {
+    public static String printTextPerRole(String[] roles, String[] textLines) {
         int counter = 0;
-        String roleNumber = "";
+        int index = 0;
         String name = "";
-        HashMap<String, String> roleReplicNumbers = new HashMap<String, String>();
-        ArrayList<String> results = new ArrayList<String>();
+        String replice = "";
+        boolean isFind = false;
+        StringBuilder stringBuilder = new StringBuilder();
         for (int i = 0; i < roles.length; i++) {
             for (int j = 0; j < textLines.length; j++) {
-                if(textLines[j].contains(roles[i])){
-                    counter++;
-                    name = roles[i];
-                    roleNumber += (j + 1) + " ";
+                if (textLines[j].contains(roles[i])) {
+                    if (isFind == false) {
+                        isFind = true;
+                        index = textLines[j].indexOf(":");
+                        name = roles[i];
+                        replice = name + ":" + "\n" + (j + 1) + ")"
+                                + textLines[j].substring(index + 1, textLines[j].length()) + "\n";
+                        stringBuilder.append(replice);
+                        replice = "";
+                        counter++;
+                    } else if (isFind == true) {
+                        index = textLines[j].indexOf(":");
+                        replice = (j + 1) + ")" + textLines[j].substring(index + 1, textLines[j].length())
+                                + "\n" + "\n";
+                        stringBuilder.append(replice);
+                        counter++;
+                        replice = "";
+                    }
                 }
             }
-
-            if (counter >= 1) {
-                String[] numbers = roleNumber.split(" ");
-                roleReplicNumbers.put(name, roleNumber);
-
-                String[] twoPartsOfLine = textLines[Integer.parseInt(numbers[0]) - 1].split(":");
-                String[] second = textLines[Integer.parseInt(numbers[1])].split(":");
-                String result = name + ":" + "\n"
-                        + numbers[0] + ")" + twoPartsOfLine[1]
-                        + "\n" + numbers[1] + ")" + second[1] + "\n";
-                results.add(result);
-
-                counter = 0;
-                roleNumber = "";
+            isFind = false;
+            if (counter == 1) {
+                stringBuilder.append("\n");
             }
+            counter = 0;
         }
 
-        return results;
+        return stringBuilder.toString();
     }
 }
