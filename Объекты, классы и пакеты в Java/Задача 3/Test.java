@@ -1,11 +1,11 @@
 public class Test {
     public static void main(String[] args) {
-        Robot robot = new Robot(0, 0, Direction.UP);
+        Robot robot = new Robot(0, 12, Direction.UP);
         moveRobot(robot, 10,12);
     }
 
     public static void moveRobot(Robot robot, int toX, int toY) {
-        while (robot.getX() != toX & robot.getY() != toY) {
+        while (robot.getX() != toX || robot.getY() != toY) {
             if (robot.getX() < toX) {
                 if (robot.getDirection() != Direction.RIGHT) {
                     while (robot.getDirection() != Direction.RIGHT) {
@@ -15,7 +15,8 @@ public class Test {
                         robot.stepForward();
                     }
                 }
-            } if (robot.getX() > toX) {
+            }
+            if (robot.getX() > toX) {
                 if (robot.getDirection() != Direction.LEFT) {
                     while (robot.getDirection() != Direction.LEFT) {
                         robot.turnRight();
@@ -24,7 +25,8 @@ public class Test {
                         robot.stepForward();
                     }
                 }
-            } if (robot.getY() > toY) {
+            }
+            if (robot.getY() > toY) {
                 if (robot.getDirection() != Direction.DOWN) {
                     while (robot.getDirection() != Direction.DOWN) {
                         robot.turnRight();
@@ -33,7 +35,8 @@ public class Test {
                         robot.stepForward();
                     }
                 }
-            } if (robot.getY() < toY) {
+            }
+            if (robot.getY() < toY) {
                 if (robot.getDirection() != Direction.UP) {
                     while (robot.getDirection() != Direction.UP) {
                         robot.turnLeft();
