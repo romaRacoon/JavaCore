@@ -1,4 +1,4 @@
-public class NegativeTextAnalyzer extends KeywordAnalyzer{
+public class NegativeTextAnalyzer extends KeywordAnalyzer {
     private String[] keywords = {":(", "=(", ":|"};
 
     @Override
