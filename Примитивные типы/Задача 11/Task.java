@@ -10,21 +10,17 @@ public class Task {
         int j = 0;
         for (int k = 0; k < sortedArray.length; k++) {
             if (i > a1.length - 1) {
-                int a = a2[j];
+                int a = a2[j++];
                 sortedArray[k] = a;
-                j++;
             } else if (j > a2.length - 1) {
-                int a = a1[i];
+                int a = a1[i++];
                 sortedArray[k] = a;
-                i++;
             } else if (a1[i] < a2[j]) {
-                int a = a1[i];
+                int a = a1[i++];
                 sortedArray[k] = a;
-                i++;
             } else {
-                int b = a2[j];
+                int b = a2[j++];
                 sortedArray[k] = b;
-                j++;
             }
         }
 
