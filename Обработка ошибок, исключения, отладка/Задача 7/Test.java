@@ -7,7 +7,7 @@ public class Test {
         logging();
     }
     public static void logging() {
-        Logger logger = Logger.getLogger("com.javamentor.logging.Test");
+        final Logger logger = Logger.getLogger("com.javamentor.logging.Test");
         logger.info("Все хорошо");
         logger.warning("Произошла ошибка");
     }
