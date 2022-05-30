@@ -8,7 +8,7 @@ public class Task {
         if (value <= 1) {
             return new BigInteger(Integer.toString(1));
         } else {
-            return BigInteger.valueOf(value).multiply(factorial(value - 1));
+            return BigInteger.valueOf(value).multiply(factorial(--value));
         }
     }
 }
