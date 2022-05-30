@@ -4,7 +4,6 @@ public class Task {
         task.drawisMonitorsCounter(10, 10);
     }
     public int drawisMonitorsCounter(int monitors, int programmers) {
-        int notDelivered = monitors % programmers;
-        return notDelivered;
+        return monitors % programmers;
     }
 }
