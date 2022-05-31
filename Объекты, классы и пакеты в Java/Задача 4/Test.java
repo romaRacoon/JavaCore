@@ -36,7 +36,7 @@ public class Test {
             if (Double.compare(complexNumber.re, re) != 0) {
                 return false;
             }
-            return Double.compare(complexNumber.re, re) == 0;
+            return Double.compare(complexNumber.getRe(), getRe()) == 0 && Double.compare(complexNumber.getIm(), getIm()) == 0;
         }
 
         @Override
@@ -47,7 +47,6 @@ public class Test {
             result = (int) (temp ^ (temp >>> 32));
             temp = Double.doubleToLongBits(im);
             result = 31 * result + (int) (temp ^ (temp >>> 32));
-            if (Double.compare(point.re))
             return result;
         }
     }
