@@ -33,19 +33,8 @@ public class Test {
                 animals[i] = (Animal) objectInputStream.readObject();
             }
             return animals;
-        } catch (IllegalArgumentException e) {
+        } catch (Exception e) {
             throw new IllegalArgumentException();
-        } catch (EOFException e) {
-            try {
-                throw new EOFException();
-            } catch (EOFException ex) {
-                throw new RuntimeException(ex);
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
         }
-        return null;
     }
 }
