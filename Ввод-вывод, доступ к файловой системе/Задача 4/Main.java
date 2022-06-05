@@ -1,23 +1,13 @@
 import java.io.*;
-import java.nio.*;
-import java.text.DecimalFormat;
+import java.math.BigDecimal;
 import java.util.*;
 
 public class Main {
     public static void main(String[] args) throws IOException {
         ArrayList<Double> trueNumbers = new ArrayList<Double>();
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-        String input = reader.readLine();
-        String[] numbers = getAllNumbers(input);
-        if (checkAllNumbersWithoutLetter(numbers) == false) {
-            System.out.println("0.000000");
-            System.exit(0);
-        } else {
-            for (int i = 0; i < numbers.length; i++) {
-                trueNumbers.add(Double.parseDouble(numbers[i]));
-            }
-            getSum(trueNumbers);
-        }
+        reader.readLine();
+        
     }
     private static String[] getAllNumbers(String input) {
         String[] numbers = input.split("\s");
@@ -48,7 +38,16 @@ public class Main {
         for (int i = 0; i < trueNumbers.size(); i++) {
             sum += trueNumbers.get(i);
         }
-        System.out.println(sum);
+        String number = Double.toString(sum);
+        int amount = new BigDecimal(number).scale();
+        if (amount == 6) {
+            System.out.println(sum);
+        } else if (amount < 6) {
+            for (int i = 0; i < 6 - amount; i++) {
+                number += "0";
+            }
+            System.out.println(number);
+        }
     }
     private static boolean findLetter(String input) {
         String alphabet = "abcdefghijklmnopqrstuvwxyz";
