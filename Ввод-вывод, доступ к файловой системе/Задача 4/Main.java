@@ -10,9 +10,7 @@ public class Main {
             for (int i = 0; i < numbers.length; i++) {
                 try {
                     amount += Double.parseDouble(numbers[i]);
-                } catch (Exception e) {
-
-                }
+                } catch (NumberFormatException e) {}
             }
         }
         System.out.printf("%.6f", amount);
