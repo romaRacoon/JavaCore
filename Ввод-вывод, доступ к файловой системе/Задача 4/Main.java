@@ -2,14 +2,19 @@ import java.util.*;
 
 public class Main {
     public static void main(String[] args) {
-        double sum = 0;
-        try (Scanner scanner = new Scanner(System.in).useLocale(Locale.US)) {
-            while (scanner.hasNext()) {
-                String input = scanner.nextLine();
+        Scanner scanner = new Scanner(System.in).useLocale(Locale.US);
+        double amount = 0;
+        while (scanner.hasNext()) {
+            String input = scanner.nextLine();
+            String[] numbers = input.split("\s");
+            for (int i = 0; i < numbers.length; i++) {
+                try {
+                    amount += Double.parseDouble(numbers[i]);
+                } catch (Exception e) {
+
+                }
             }
-        } catch (Exception e) {
-            System.out.printf("%f", 0);
         }
-        System.out.printf("%.6f", sum);
+        System.out.printf("%.6f", amount);
     }
 }
