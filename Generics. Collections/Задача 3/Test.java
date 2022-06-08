@@ -21,30 +21,44 @@ public class Test {
             this.first = first;
             this.second = second;
         }
-        public static <T, S> Pair <T, S> of(T first, S second) {
-            return new Pair<>(first, second);
-        }
+
         public T getFirst() {
             return first;
         }
+
         public S getSecond() {
             return second;
         }
 
         @Override
-        public boolean equals(Object obj) {
-            if (this == obj) {
+        public boolean equals(Object o) {
+            if (this == o) {
                 return true;
             }
-
-            return obj instanceof Pair<?,?> other
-                    && Objects.equals(first, other.getFirst())
-                    && Objects.equals(second, other.getSecond());
+            if ((o instanceof Pair<?, ?>) == false) {
+                return false;
+            }
+            Pair<?, ?> pair = (Pair<?, ?>) o;
+            return Objects.equals(first, pair.first) && Objects.equals(second, pair.second);
         }
 
         @Override
         public int hashCode() {
-            return Objects.hashCode(first) + Objects.hashCode(second);
+            int result = 31;
+
+            if (first != null) {
+                result = result * 17 + first.hashCode();
+            }
+            if (second != null) {
+                result = result * 17 + second.hashCode();
+            } else if (first == null) {
+                return 0;
+            }
+            return result;
+        }
+
+        public static <T, S> Pair<T, S> of(T first, S second) {
+            return new Pair<>(first, second);
         }
     }
 }
