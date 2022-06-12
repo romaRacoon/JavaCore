@@ -1,70 +1,40 @@
-import java.util.Objects;
-import java.util.Arrays;
+import java.util.*;
+import java.util.function.UnaryOperator;
 
 public class Test {
     public static void main(String[] args) {
-        DynamicArray<Integer> array = new DynamicArray<>();
-        array.add(1);
-        array.add(2);
-        array.add(3);
-        array.add(4);
-        array.add(5);
-        array.add(6);
-        array.add(7);
-        array.add(8);
-        array.add(9);
-        array.add(10);
-        array.remove(7);
-        array.remove(7);
-        array.remove(7);
-        array.add(0);
-        array.add(1);
-        array.add(2);
-        array.add(3);
-        array.add(4);
 
-        for (int i = 0; i < array.size(); i++) {
-            System.out.print(array.get(i) + " ");
-        }
     }
     public static class DynamicArray<T> {
-        private T[] array = (T[]) new Object[0];
-        private int amountNullableElements = array.length;
-        private int addedIndex = 0;
-
-        public DynamicArray() {
-        }
+        private int size = 0;
+        private static final double DEFAULT_LOAD = 0.75;
+        private T[] array = (T[]) new Object[10];
 
         public void add(T el) {
-            if (amountNullableElements > 0) {
-                array[addedIndex] = el;
-                amountNullableElements--;
-            } else {
-                T[] tempArray = (T[]) new Object[array.length + 1];
-                for (int i = 0; i < array.length; i++) {
-                    tempArray[i] = array[i];
-                }
-                tempArray[array.length] = el;
-                array = tempArray;
+            if (size >= array.length * DEFAULT_LOAD) {
+                array = Arrays.copyOf(array, array.length * 2);
             }
+            array[size++] = el;
+        }
+
+        public void remove(int index) {
+            if (checkIndex(index)) {
+                throw new ArrayIndexOutOfBoundsException();
+            }
+            System.arraycopy(array, index + 1, array, index, array.length - index - 1);
+            size--;
         }
 
         public T get(int index) {
-            if (index >= array.length || index < 0) {
+            if (checkIndex(index)) {
                 throw new ArrayIndexOutOfBoundsException();
             } else {
                 return array[index];
             }
         }
 
-        public void remove(int index) {
-            T[] tempArray = (T[]) new Object[array.length - 1];
-            for (int i = 0, j = 0; i < array.length; i++) {
-                if (i != index) {
-                    tempArray[j++] = array[i];
-                }
-            }
-            array = tempArray;
+        private boolean checkIndex(int index) {
+            return index >= size || index < 0;
         }
     }
 }
