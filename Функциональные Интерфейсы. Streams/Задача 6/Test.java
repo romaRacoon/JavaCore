@@ -13,7 +13,6 @@ public class Test {
                 .entrySet()
                 .stream()
                 .sorted(Map.Entry.comparingByValue(Comparator.reverseOrder()))
-                .limit(10)
                 .collect(Collectors.toMap(
                         Map.Entry::getKey,
                         Map.Entry::getValue,
@@ -24,7 +23,7 @@ public class Test {
                 ));
 
         for (String s : map.keySet()) {
-            System.out.println(s + "=" + map.get(s));
+            System.out.println(s);
         }
     }
 }
