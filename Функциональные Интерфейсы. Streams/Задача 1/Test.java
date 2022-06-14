@@ -1,4 +1,3 @@
-import java.util.*;
 import java.util.function.UnaryOperator;
 
 public class Test {
@@ -6,7 +5,6 @@ public class Test {
 
     }
     public UnaryOperator<Integer> sqrt() {
-        UnaryOperator<Integer> unaryOperator = x -> x * x;
-        return unaryOperator;
+        return x -> x * x;
     }
 }
