@@ -1,15 +1,13 @@
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
-import java.util.Arrays;
-import java.util.Comparator;
-import java.util.Map;
+import java.util.*;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
 public class Test {
-    public static void main(String[] args) {
-        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
-        bufferedReader.lines().map(l -> l.toLowerCase().replaceAll("\\p{Punct}"," ").split("\\s+"))
+    public static void main(String[] args) {;
+        new BufferedReader(new InputStreamReader(System.in)).lines()
+                .map(l -> l.toLowerCase().replaceAll("\\p{Punct}"," ").split("\\s+"))
                 .flatMap(Arrays::stream)
                 .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()))
                 .entrySet().stream()
